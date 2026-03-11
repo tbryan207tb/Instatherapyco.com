@@ -1008,6 +1008,12 @@
       text-align: center; color: var(--muted);
       font-size: 0.8rem; margin-top: 44px; letter-spacing: 0.02em;
     }
+    .pricing-agree {
+      text-align: center; color: var(--muted);
+      font-size: 0.78rem; margin-top: 10px;
+    }
+    .pricing-agree a { color: var(--muted); text-decoration: underline; }
+    .pricing-agree a:hover { color: var(--text); }
 
     /* ─── MODALS ──────────────────────────────────── */
     .modal-overlay {
@@ -1046,6 +1052,9 @@
     .footer-brand    { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
     .footer-tagline  { font-size: 13px; color: var(--muted); }
     .footer-disclaimer { font-size: 13px; color: var(--muted); line-height: 1.7; max-width: 46ch; }
+    .footer-legal-links { display: flex; gap: 8px; align-items: center; margin-top: 8px; font-size: 12px; color: var(--muted); }
+    .footer-legal-links a { color: var(--muted); text-decoration: underline; }
+    .footer-legal-links a:hover { color: var(--text); }
 
     /* ─── FADE-UP ─────────────────────────────────── */
     .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
@@ -1116,6 +1125,24 @@
       margin: 12px auto 0;
     }
     .cancel-sub-btn:hover { color: var(--text); }
+
+    /* ─── LEGAL PAGES ─────────────────────────────── */
+    .legal-page {
+      position: fixed; inset: 0; background: #F3EDE6;
+      z-index: 99999; overflow-y: auto;
+    }
+    .legal-page-inner { max-width: 100%; }
+    .legal-page-close {
+      position: sticky; top: 0; z-index: 10;
+      background: #F3EDE6; border-bottom: 1px solid rgba(17,17,17,.1);
+      padding: 16px 40px;
+    }
+    .legal-close-btn {
+      background: none; border: none; font-family: inherit;
+      font-size: 0.9rem; color: #555; cursor: pointer;
+      padding: 0; font-weight: 500;
+    }
+    .legal-close-btn:hover { color: #111; }
   </style>
 </head>
 <body>
@@ -1540,6 +1567,7 @@
 
       </div>
       <div class="pricing-note">🔒 Secure checkout via Stripe &nbsp;·&nbsp; No contracts &nbsp;·&nbsp; Cancel anytime</div>
+      <div class="pricing-agree">By subscribing you agree to our <a href="#" onclick="showLegal('terms'); return false;">Terms of Service</a> and <a href="#" onclick="showLegal('privacy'); return false;">Privacy Policy</a>.</div>
       <button class="cancel-sub-btn" onclick="showCancelFlow()">Already a member? Manage or cancel subscription</button>
     </div>
   </section>
@@ -1616,9 +1644,14 @@
       <div>
         <div class="footer-brand">Instatherapy</div>
         <div class="footer-tagline">A safe place to talk when life feels heavy.</div>
+        <div class="footer-legal-links">
+          <a href="#" onclick="showLegal('terms'); return false;">Terms of Service</a>
+          <span>·</span>
+          <a href="#" onclick="showLegal('privacy'); return false;">Privacy Policy</a>
+        </div>
       </div>
       <div class="footer-disclaimer">
-        Instatherapy provides emotional support conversations and is not a licensed therapy or crisis service. If you are in immediate danger or thinking about harming yourself, call or text 988 in the U.S. or contact local emergency services.
+        Instatherapy provides emotional support conversations and is not a licensed therapy or crisis service. If you are in immediate danger or thinking about harming yourself, call or text 988 in the U.S. or contact local emergency services. By using Instatherapy you agree to our <a href="#" onclick="showLegal('terms'); return false;" style="color:inherit;text-decoration:underline;">Terms of Service</a> and <a href="#" onclick="showLegal('privacy'); return false;" style="color:inherit;text-decoration:underline;">Privacy Policy</a>.
       </div>
     </div>
   </footer>
@@ -1809,5 +1842,648 @@
         });
     }
   </script>
-</body>
-</html>
+
+  <!-- TERMS OF SERVICE PAGE -->
+  <div id="termsPage" class="legal-page" style="display:none;">
+    <style>
+:root {
+      --bg: #F3EDE6; --text: #111111; --muted: #555555;
+      --white: #ffffff; --blush: #EFD6DA;
+      --line: rgba(17,17,17,.1); --r: 20px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--text); text-decoration: underline; }
+    nav {
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 20px 40px; display: flex;
+      justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500; text-decoration: none; color: var(--text);
+    }
+    .nav-back {
+      font-size: 0.85rem; color: var(--muted);
+      text-decoration: none; display: flex; align-items: center; gap: 6px;
+    }
+    .nav-back:hover { color: var(--text); }
+    .hero-band {
+      background: #111; color: #fff;
+      padding: 60px 40px; text-align: center;
+    }
+    .hero-band h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .hero-band p { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+    .container {
+      max-width: 780px; margin: 0 auto;
+      padding: 60px 24px 100px;
+    }
+    .toc {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: 20px; padding: 32px 36px; margin-bottom: 56px;
+    }
+    .toc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; margin-bottom: 16px;
+    }
+    .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .toc li { font-size: 0.9rem; }
+    .toc a { color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--text); }
+    .section { margin-bottom: 52px; }
+    .section-num {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 500;
+      margin-bottom: 16px; border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    p { font-size: 0.95rem; color: #333; margin-bottom: 14px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 0.95rem; color: #333; margin-bottom: 8px; line-height: 1.7; }
+    .warning-box {
+      background: #fff3cd; border: 1px solid #ffc107;
+      border-radius: 14px; padding: 20px 24px; margin: 20px 0;
+    }
+    .warning-box p { color: #856404; margin: 0; font-weight: 500; }
+    .crisis-box {
+      background: var(--blush); border-radius: 14px;
+      padding: 20px 24px; margin: 20px 0;
+    }
+    .crisis-box p { color: #111; margin: 0; }
+    .crisis-box strong { font-weight: 600; }
+    footer {
+      background: #111; color: rgba(255,255,255,0.5);
+      text-align: center; padding: 32px;
+      font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); }
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero-band { padding: 44px 20px; }
+      .toc { padding: 24px 20px; }
+    }
+    </style>
+    <div class="legal-page-inner">
+      <div class="legal-page-close">
+        <button onclick="closeLegal()" class="legal-close-btn">← Back to Instatherapy</button>
+      </div>
+<nav>
+  <a class="nav-brand" href="/">Instatherapy</a>
+  <a class="nav-back" href="/">← Back to site</a>
+</nav>
+
+<div class="hero-band">
+  <h1>Terms of Service</h1>
+  <p>Last updated: March 11, 2026 &nbsp;·&nbsp; Effective immediately</p>
+</div>
+
+<div class="container">
+
+  <div class="warning-box">
+    <p>⚠️ IMPORTANT: Instatherapy is NOT a licensed mental health service, therapy provider, or medical service of any kind. By using this platform, you acknowledge and agree to this. Please read these terms fully before using our service.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#s1">Acceptance of Terms</a></li>
+      <li><a href="#s2">Nature of Service — Not Therapy</a></li>
+      <li><a href="#s3">Not a Crisis Service</a></li>
+      <li><a href="#s4">Eligibility</a></li>
+      <li><a href="#s5">User Responsibilities</a></li>
+      <li><a href="#s6">Subscription & Payments</a></li>
+      <li><a href="#s7">Refund Policy</a></li>
+      <li><a href="#s8">Cancellation Policy</a></li>
+      <li><a href="#s9">Disclaimer of Warranties</a></li>
+      <li><a href="#s10">Limitation of Liability</a></li>
+      <li><a href="#s11">Indemnification</a></li>
+      <li><a href="#s12">Intellectual Property</a></li>
+      <li><a href="#s13">Privacy</a></li>
+      <li><a href="#s14">Changes to Terms</a></li>
+      <li><a href="#s15">Governing Law</a></li>
+      <li><a href="#s16">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <div class="section-num">01</div>
+    <h2>Acceptance of Terms</h2>
+    <p>By accessing or using Instatherapy ("the Service," "we," "us," or "our"), including our website at instatherapyco.com and any associated applications or features, you ("User," "you") agree to be bound by these Terms of Service ("Terms") in their entirety.</p>
+    <p>If you do not agree to these Terms, you must not access or use the Service. Your continued use of the Service following any changes to these Terms constitutes your acceptance of the revised Terms.</p>
+    <p>These Terms constitute a legally binding agreement between you and Instatherapy. By clicking "I Agree," starting a session, or making a payment, you confirm that you have read, understood, and agree to these Terms.</p>
+  </div>
+
+  <div class="section" id="s2">
+    <div class="section-num">02</div>
+    <h2>Nature of Service — Not Therapy</h2>
+    <p><strong>Instatherapy is an AI-powered emotional support and wellness companion service. It is NOT therapy, counseling, psychiatry, psychology, or any form of licensed mental health treatment.</strong></p>
+    <p>Specifically, you acknowledge and agree that:</p>
+    <ul>
+      <li>Mariana is an artificial intelligence companion, not a human being, licensed therapist, counselor, psychologist, psychiatrist, social worker, or any other licensed mental health professional.</li>
+      <li>Conversations with Mariana do not constitute a therapeutic relationship, clinical relationship, or any professional relationship of any kind.</li>
+      <li>No diagnosis, treatment plan, prescription, or clinical advice will be provided through this Service.</li>
+      <li>Instatherapy is not a substitute for professional mental health care, medical advice, or crisis intervention services.</li>
+      <li>The name "Instatherapy" is a brand name only and does not imply, represent, or guarantee the provision of licensed therapy services of any kind.</li>
+      <li>You should consult a licensed mental health professional for any mental health concerns, diagnoses, or treatment.</li>
+    </ul>
+    <p>By using this Service, you expressly acknowledge that you understand Instatherapy is an emotional wellness companion tool and not a licensed mental health service.</p>
+  </div>
+
+  <div class="section" id="s3">
+    <div class="section-num">03</div>
+    <h2>Not a Crisis Service</h2>
+    <div class="crisis-box">
+      <p><strong>Instatherapy is NOT a crisis service and is NOT equipped to handle mental health emergencies.</strong> If you are experiencing a mental health crisis, thoughts of suicide or self-harm, or any emergency situation, please contact emergency services immediately.</p>
+    </div>
+    <p>If you are in crisis or danger, please contact:</p>
+    <ul>
+      <li><strong>988 Suicide & Crisis Lifeline:</strong> Call or text 988 (US)</li>
+      <li><strong>Emergency Services:</strong> Call 911 (US) or your local emergency number</li>
+      <li><strong>Crisis Text Line:</strong> Text HOME to 741741</li>
+      <li><strong>International Association for Suicide Prevention:</strong> https://www.iasp.info/resources/Crisis_Centres/</li>
+    </ul>
+    <p>Instatherapy expressly disclaims any responsibility for outcomes related to mental health crises, emergencies, or situations requiring immediate professional intervention. By using this Service, you agree not to use it as a substitute for emergency or crisis services.</p>
+  </div>
+
+  <div class="section" id="s4">
+    <div class="section-num">04</div>
+    <h2>Eligibility</h2>
+    <p>You must be at least 18 years of age to use this Service. By using Instatherapy, you represent and warrant that:</p>
+    <ul>
+      <li>You are at least 18 years old.</li>
+      <li>You have the legal capacity to enter into a binding agreement.</li>
+      <li>You are not prohibited from using the Service under applicable law.</li>
+      <li>All information you provide is accurate and truthful.</li>
+    </ul>
+    <p>Instatherapy reserves the right to terminate accounts of users who misrepresent their age or eligibility.</p>
+  </div>
+
+  <div class="section" id="s5">
+    <div class="section-num">05</div>
+    <h2>User Responsibilities</h2>
+    <p>By using Instatherapy, you agree to:</p>
+    <ul>
+      <li>Use the Service only for lawful, personal, non-commercial purposes.</li>
+      <li>Not attempt to manipulate, jailbreak, or misuse the AI companion in harmful or illegal ways.</li>
+      <li>Not share your account credentials with others.</li>
+      <li>Not use the Service to harm yourself or others.</li>
+      <li>Seek professional help when needed and not rely solely on Instatherapy for mental health support.</li>
+      <li>Not reproduce, distribute, or commercialize any content generated by the Service without written permission.</li>
+      <li>Not use the Service if you are in a mental health crisis — call 988 or 911 instead.</li>
+    </ul>
+    <p>Instatherapy reserves the right to suspend or terminate your account for violation of these responsibilities without refund.</p>
+  </div>
+
+  <div class="section" id="s6">
+    <div class="section-num">06</div>
+    <h2>Subscription & Payments</h2>
+    <p>Instatherapy offers paid subscription plans including monthly and annual billing options. By subscribing, you agree to the following:</p>
+    <ul>
+      <li>Subscription fees are charged at the beginning of each billing cycle (monthly or annually).</li>
+      <li>Annual plans are billed as a single one-time payment for the full year.</li>
+      <li>All payments are processed securely through Stripe. Instatherapy does not store your payment information.</li>
+      <li>Prices are listed in US dollars and are subject to change with 30 days notice.</li>
+      <li>You authorize Instatherapy to charge your payment method on a recurring basis until you cancel.</li>
+      <li>Failed payments may result in immediate suspension of your account.</li>
+      <li>Taxes may apply depending on your location and are your responsibility.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s7">
+    <div class="section-num">07</div>
+    <h2>Refund Policy</h2>
+    <p>Due to the digital nature of this Service:</p>
+    <ul>
+      <li><strong>Monthly subscriptions:</strong> No refunds are issued for partial months. You retain access through the end of your billing period after cancellation.</li>
+      <li><strong>Annual subscriptions:</strong> Refunds may be considered within 7 days of initial purchase if the Service has not been used substantially. Refund requests must be submitted to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="630a0d101702170b061102131a000c23040e020a0f4d000c0e">[email&#160;protected]</a>.</li>
+      <li><strong>No refunds</strong> will be issued after 7 days or for accounts terminated due to Terms of Service violations.</li>
+      <li>Instatherapy reserves the right to offer refunds at its sole discretion in exceptional circumstances.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s8">
+    <div class="section-num">08</div>
+    <h2>Cancellation Policy</h2>
+    <p>You may cancel your subscription at any time. Upon cancellation:</p>
+    <ul>
+      <li>You will retain access to the Service through the end of your current billing period.</li>
+      <li>You will not be charged for subsequent billing periods.</li>
+      <li>Your account data may be retained for up to 90 days after cancellation before deletion.</li>
+      <li>To cancel, contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd94938e899c8995988f9c8d849e92bd9a909c9491d39e9290">[email&#160;protected]</a> or use the cancellation option in your account settings.</li>
+    </ul>
+    <p>Instatherapy also offers a subscription pause option. Pausing suspends billing for up to 30 days. You may request a pause by contacting us directly.</p>
+  </div>
+
+  <div class="section" id="s9">
+    <div class="section-num">09</div>
+    <h2>Disclaimer of Warranties</h2>
+    <p><strong>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED.</strong></p>
+    <p>Instatherapy expressly disclaims all warranties including but not limited to:</p>
+    <ul>
+      <li>Warranties of merchantability, fitness for a particular purpose, and non-infringement.</li>
+      <li>Any warranty that the Service will be uninterrupted, error-free, or free of viruses or harmful components.</li>
+      <li>Any warranty regarding the accuracy, reliability, or completeness of any content generated by the AI companion.</li>
+      <li>Any warranty that the Service will meet your emotional, psychological, or mental health needs.</li>
+    </ul>
+    <p>You use the Service at your own risk. Instatherapy does not guarantee any specific outcome, improvement, or result from using the Service.</p>
+  </div>
+
+  <div class="section" id="s10">
+    <div class="section-num">10</div>
+    <h2>Limitation of Liability</h2>
+    <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, INSTATHERAPY AND ITS OWNERS, OPERATORS, EMPLOYEES, AGENTS, AND AFFILIATES SHALL NOT BE LIABLE FOR ANY:</strong></p>
+    <ul>
+      <li>Indirect, incidental, special, consequential, or punitive damages.</li>
+      <li>Loss of profits, data, use, goodwill, or other intangible losses.</li>
+      <li>Damages arising from your use of or inability to use the Service.</li>
+      <li>Damages arising from any mental health outcomes, decisions made, or actions taken based on conversations with the AI companion.</li>
+      <li>Damages arising from your failure to seek professional help when needed.</li>
+      <li>Damages arising from unauthorized access to or alteration of your data.</li>
+    </ul>
+    <p>In no event shall Instatherapy's total liability to you for all claims exceed the amount you paid to Instatherapy in the 12 months preceding the claim.</p>
+    <p>Some jurisdictions do not allow the exclusion of certain warranties or limitation of liability. In such jurisdictions, liability is limited to the greatest extent permitted by law.</p>
+  </div>
+
+  <div class="section" id="s11">
+    <div class="section-num">11</div>
+    <h2>Indemnification</h2>
+    <p>You agree to defend, indemnify, and hold harmless Instatherapy and its owners, operators, employees, and agents from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys' fees) arising out of or relating to:</p>
+    <ul>
+      <li>Your use of the Service.</li>
+      <li>Your violation of these Terms.</li>
+      <li>Your violation of any third-party rights.</li>
+      <li>Any harm you cause to yourself or others in connection with the Service.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="s12">
+    <div class="section-num">12</div>
+    <h2>Intellectual Property</h2>
+    <p>All content, branding, design, code, and materials associated with Instatherapy — including but not limited to the name "Instatherapy," the "Mariana" companion persona, and all website content — are the intellectual property of Instatherapy and are protected by applicable copyright, trademark, and intellectual property laws.</p>
+    <p>You may not reproduce, distribute, modify, create derivative works of, publicly display, or commercially exploit any content from this Service without prior written permission.</p>
+  </div>
+
+  <div class="section" id="s13">
+    <div class="section-num">13</div>
+    <h2>Privacy</h2>
+    <p>Your use of the Service is also governed by our <a href="#" onclick="showLegal('privacy'); return false;">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the Service, you consent to the collection and use of your information as described in the Privacy Policy.</p>
+    <p>Please be aware that conversations with the AI companion may be processed by third-party AI providers (including ElevenLabs) subject to their own privacy policies. Do not share sensitive personal information such as Social Security numbers, financial account details, or passwords in your conversations.</p>
+  </div>
+
+  <div class="section" id="s14">
+    <div class="section-num">14</div>
+    <h2>Changes to Terms</h2>
+    <p>Instatherapy reserves the right to modify these Terms at any time. When changes are made, we will update the "Last Updated" date at the top of this page. For material changes, we will notify you via email or a prominent notice on our website.</p>
+    <p>Your continued use of the Service after changes are posted constitutes your acceptance of the new Terms. If you do not agree to the revised Terms, you must stop using the Service and cancel your subscription.</p>
+  </div>
+
+  <div class="section" id="s15">
+    <div class="section-num">15</div>
+    <h2>Governing Law</h2>
+    <p>These Terms shall be governed by and construed in accordance with the laws of the United States and the state in which Instatherapy operates, without regard to conflict of law principles.</p>
+    <p>Any disputes arising out of or relating to these Terms or the Service shall be resolved through binding arbitration in accordance with the American Arbitration Association rules, except that either party may seek injunctive relief in a court of competent jurisdiction.</p>
+    <p>You waive any right to participate in a class action lawsuit or class-wide arbitration against Instatherapy.</p>
+  </div>
+
+  <div class="section" id="s16">
+    <div class="section-num">16</div>
+    <h2>Contact</h2>
+    <p>If you have any questions about these Terms of Service, please contact us:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="80e9eef3f4e1f4e8e5f2e1f0f9e3efc0e7ede1e9ecaee3efed">[email&#160;protected]</a></li>
+      <li><strong>Website:</strong> instatherapyco.com</li>
+    </ul>
+    <p>We will respond to inquiries within 5 business days.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Instatherapy. All rights reserved. &nbsp;·&nbsp; <a href="#" onclick="showLegal('terms'); return false;">Terms of Service</a> &nbsp;·&nbsp; <a href="#" onclick="showLegal('privacy'); return false;">Privacy Policy</a></p>
+</footer>
+    </div>
+  </div>
+
+  <!-- PRIVACY POLICY PAGE -->
+  <div id="privacyPage" class="legal-page" style="display:none;">
+    <style>
+:root {
+      --bg: #F3EDE6; --text: #111111; --muted: #555555;
+      --white: #ffffff; --blush: #EFD6DA;
+      --line: rgba(17,17,17,.1); --r: 20px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300; line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--text); text-decoration: underline; }
+    nav {
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 20px 40px; display: flex;
+      justify-content: space-between; align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 500; text-decoration: none; color: var(--text);
+    }
+    .nav-back { font-size: 0.85rem; color: var(--muted); text-decoration: none; }
+    .nav-back:hover { color: var(--text); }
+    .hero-band {
+      background: #111; color: #fff;
+      padding: 60px 40px; text-align: center;
+    }
+    .hero-band h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 500; margin-bottom: 12px;
+    }
+    .hero-band p { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+    .container { max-width: 780px; margin: 0 auto; padding: 60px 24px 100px; }
+    .toc {
+      background: var(--white); border: 1px solid var(--line);
+      border-radius: 20px; padding: 32px 36px; margin-bottom: 56px;
+    }
+    .toc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 600; margin-bottom: 16px;
+    }
+    .toc ol { padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .toc li { font-size: 0.9rem; }
+    .toc a { color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--text); }
+    .section { margin-bottom: 52px; }
+    .section-num {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 500;
+      margin-bottom: 16px; border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+    }
+    p { font-size: 0.95rem; color: #333; margin-bottom: 14px; }
+    ul, ol { padding-left: 22px; margin-bottom: 14px; }
+    li { font-size: 0.95rem; color: #333; margin-bottom: 8px; line-height: 1.7; }
+    .highlight-box {
+      background: var(--blush); border-radius: 14px;
+      padding: 20px 24px; margin: 20px 0;
+    }
+    .highlight-box p { color: #111; margin: 0; }
+    footer {
+      background: #111; color: rgba(255,255,255,0.5);
+      text-align: center; padding: 32px; font-size: 0.82rem;
+    }
+    footer a { color: rgba(255,255,255,0.7); }
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .hero-band { padding: 44px 20px; }
+      .toc { padding: 24px 20px; }
+    }
+    </style>
+    <div class="legal-page-inner">
+      <div class="legal-page-close">
+        <button onclick="closeLegal()" class="legal-close-btn">← Back to Instatherapy</button>
+      </div>
+<nav>
+  <a class="nav-brand" href="/">Instatherapy</a>
+  <a class="nav-back" href="/">← Back to site</a>
+</nav>
+
+<div class="hero-band">
+  <h1>Privacy Policy</h1>
+  <p>Last updated: March 11, 2026 &nbsp;·&nbsp; Effective immediately</p>
+</div>
+
+<div class="container">
+
+  <div class="highlight-box">
+    <p>🤍 Your privacy matters to us. This policy explains clearly what we collect, why we collect it, and how we protect it. We do not sell your personal data to anyone.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#p1">Who We Are</a></li>
+      <li><a href="#p2">Information We Collect</a></li>
+      <li><a href="#p3">How We Use Your Information</a></li>
+      <li><a href="#p4">How We Share Your Information</a></li>
+      <li><a href="#p5">Third-Party Services</a></li>
+      <li><a href="#p6">Conversation Data</a></li>
+      <li><a href="#p7">Cookies & Tracking</a></li>
+      <li><a href="#p8">Data Retention</a></li>
+      <li><a href="#p9">Your Rights</a></li>
+      <li><a href="#p10">Children's Privacy</a></li>
+      <li><a href="#p11">Data Security</a></li>
+      <li><a href="#p12">California Privacy Rights (CCPA)</a></li>
+      <li><a href="#p13">Changes to This Policy</a></li>
+      <li><a href="#p14">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="p1">
+    <div class="section-num">01</div>
+    <h2>Who We Are</h2>
+    <p>Instatherapy ("we," "us," "our") operates the website instatherapyco.com and provides an AI-powered emotional wellness companion service. We are based in the United States.</p>
+    <p>This Privacy Policy applies to all information collected through our website, services, and any related interactions you have with us.</p>
+  </div>
+
+  <div class="section" id="p2">
+    <div class="section-num">02</div>
+    <h2>Information We Collect</h2>
+    <p>We collect the following categories of information:</p>
+    <p><strong>Information you provide directly:</strong></p>
+    <ul>
+      <li>Email address (when you subscribe or contact us)</li>
+      <li>Payment information (processed and stored securely by Stripe — we never see or store your full card details)</li>
+      <li>Any information you voluntarily share in conversations with Mariana</li>
+    </ul>
+    <p><strong>Information collected automatically:</strong></p>
+    <ul>
+      <li>IP address and general location data</li>
+      <li>Browser type and device information</li>
+      <li>Pages visited and time spent on our site</li>
+      <li>Referring URLs</li>
+      <li>Session data and usage patterns</li>
+    </ul>
+    <p><strong>Information from third parties:</strong></p>
+    <ul>
+      <li>Payment and billing information from Stripe</li>
+      <li>Technical data from our hosting and infrastructure providers</li>
+    </ul>
+  </div>
+
+  <div class="section" id="p3">
+    <div class="section-num">03</div>
+    <h2>How We Use Your Information</h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Provide, operate, and improve the Instatherapy service</li>
+      <li>Process payments and manage your subscription</li>
+      <li>Send you service-related communications (receipts, updates, account notices)</li>
+      <li>Respond to your inquiries and support requests</li>
+      <li>Analyze usage patterns to improve our service</li>
+      <li>Comply with legal obligations</li>
+      <li>Prevent fraud and ensure platform security</li>
+      <li>Send you promotional communications (only with your consent — you may opt out at any time)</li>
+    </ul>
+    <p>We do not use your information for automated decision-making that produces legal or similarly significant effects without human review.</p>
+  </div>
+
+  <div class="section" id="p4">
+    <div class="section-num">04</div>
+    <h2>How We Share Your Information</h2>
+    <p><strong>We do not sell your personal data. Ever.</strong></p>
+    <p>We may share your information only in the following limited circumstances:</p>
+    <ul>
+      <li><strong>Service providers:</strong> With trusted third-party providers who assist us in operating our service (Stripe for payments, ElevenLabs for AI voice, hosting providers). These providers are contractually obligated to protect your data.</li>
+      <li><strong>Legal requirements:</strong> If required by law, subpoena, court order, or to protect the rights, property, or safety of Instatherapy, our users, or the public.</li>
+      <li><strong>Business transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you before your data is transferred and becomes subject to a different privacy policy.</li>
+      <li><strong>With your consent:</strong> In any other circumstances, only with your explicit consent.</li>
+    </ul>
+  </div>
+
+  <div class="section" id="p5">
+    <div class="section-num">05</div>
+    <h2>Third-Party Services</h2>
+    <p>Instatherapy uses the following third-party services that may collect or process your data:</p>
+    <ul>
+      <li><strong>Stripe</strong> — Payment processing. Subject to Stripe's Privacy Policy at stripe.com/privacy.</li>
+      <li><strong>ElevenLabs</strong> — AI voice and conversation technology. Conversations with Mariana are processed through ElevenLabs. Subject to ElevenLabs' Privacy Policy at elevenlabs.io/privacy.</li>
+      <li><strong>GitHub Pages</strong> — Website hosting. Subject to GitHub's Privacy Policy.</li>
+      <li><strong>Google Fonts</strong> — Typography. May collect basic usage data.</li>
+    </ul>
+    <p>We encourage you to review the privacy policies of these third-party services. We are not responsible for the privacy practices of third parties.</p>
+    <p><strong>Important note about conversations:</strong> Voice conversations with Mariana are processed by ElevenLabs' AI infrastructure. Please do not share highly sensitive personal information (Social Security numbers, financial account details, passwords) in your conversations.</p>
+  </div>
+
+  <div class="section" id="p6">
+    <div class="section-num">06</div>
+    <h2>Conversation Data</h2>
+    <p>Conversations you have with Mariana are processed in real-time by ElevenLabs' AI systems. Regarding this data:</p>
+    <ul>
+      <li>Conversation content may be temporarily processed to generate responses.</li>
+      <li>We do not permanently store the full text or audio of your conversations on our own servers.</li>
+      <li>ElevenLabs may retain conversation data subject to their own data retention policies.</li>
+      <li>Conversation data is not used to build individual user profiles for advertising purposes.</li>
+      <li>We may review aggregate, anonymized usage statistics to improve the service.</li>
+    </ul>
+    <p>We strongly advise against sharing sensitive personal, financial, or identifying information during conversations with Mariana.</p>
+  </div>
+
+  <div class="section" id="p7">
+    <div class="section-num">07</div>
+    <h2>Cookies & Tracking</h2>
+    <p>Our website may use cookies and similar tracking technologies to:</p>
+    <ul>
+      <li>Remember your preferences and settings</li>
+      <li>Analyze website traffic and usage patterns</li>
+      <li>Improve your experience on our site</li>
+    </ul>
+    <p>You can control cookies through your browser settings. Disabling cookies may affect some functionality of the Service. We do not use cookies for third-party advertising or cross-site tracking.</p>
+  </div>
+
+  <div class="section" id="p8">
+    <div class="section-num">08</div>
+    <h2>Data Retention</h2>
+    <p>We retain your personal information for as long as necessary to provide the Service and comply with our legal obligations:</p>
+    <ul>
+      <li><strong>Account data:</strong> Retained for the duration of your subscription plus 90 days after cancellation.</li>
+      <li><strong>Payment records:</strong> Retained for 7 years as required by tax and financial regulations.</li>
+      <li><strong>Email communications:</strong> Retained for up to 3 years.</li>
+      <li><strong>Usage analytics:</strong> Retained in anonymized form indefinitely.</li>
+    </ul>
+    <p>You may request deletion of your personal data at any time by contacting us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="345d5a474055405c514655444d575b745359555d581a575b59">[email&#160;protected]</a>. Note that some data may be retained as required by law.</p>
+  </div>
+
+  <div class="section" id="p9">
+    <div class="section-num">09</div>
+    <h2>Your Rights</h2>
+    <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+    <ul>
+      <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
+      <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data.</li>
+      <li><strong>Deletion:</strong> Request deletion of your personal data ("right to be forgotten").</li>
+      <li><strong>Portability:</strong> Request your data in a portable format.</li>
+      <li><strong>Opt-out:</strong> Opt out of marketing communications at any time.</li>
+      <li><strong>Restriction:</strong> Request restriction of processing of your data.</li>
+      <li><strong>Objection:</strong> Object to certain types of data processing.</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92fbfce1e6f3e6faf7e0f3e2ebf1fdd2f5fff3fbfebcf1fdff">[email&#160;protected]</a>. We will respond within 30 days.</p>
+  </div>
+
+  <div class="section" id="p10">
+    <div class="section-num">10</div>
+    <h2>Children's Privacy</h2>
+    <p>Instatherapy is not intended for use by anyone under the age of 18. We do not knowingly collect personal information from children under 18. If we become aware that we have collected data from a child under 18, we will delete that information immediately.</p>
+    <p>If you believe we may have collected information from a minor, please contact us immediately at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb8285989f8a9f838e998a9b928884ab8c868a8287c5888486">[email&#160;protected]</a>.</p>
+  </div>
+
+  <div class="section" id="p11">
+    <div class="section-num">11</div>
+    <h2>Data Security</h2>
+    <p>We take the security of your data seriously and implement appropriate technical and organizational measures to protect it, including:</p>
+    <ul>
+      <li>HTTPS encryption for all data transmitted through our website</li>
+      <li>Secure payment processing through Stripe's PCI-compliant infrastructure</li>
+      <li>Limited access to personal data on a need-to-know basis</li>
+      <li>Regular review of our security practices</li>
+    </ul>
+    <p>However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your data, we cannot guarantee absolute security. In the event of a data breach that affects your rights, we will notify you as required by applicable law.</p>
+  </div>
+
+  <div class="section" id="p12">
+    <div class="section-num">12</div>
+    <h2>California Privacy Rights (CCPA)</h2>
+    <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+    <ul>
+      <li><strong>Right to Know:</strong> You may request information about the categories and specific pieces of personal information we collect about you.</li>
+      <li><strong>Right to Delete:</strong> You may request deletion of your personal information, subject to certain exceptions.</li>
+      <li><strong>Right to Opt-Out:</strong> You have the right to opt out of the sale of your personal information. We do not sell personal information.</li>
+      <li><strong>Right to Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights.</li>
+    </ul>
+    <p>To exercise your California privacy rights, contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="90f9fee3e4f1e4f8f5e2f1e0e9f3ffd0f7fdf1f9fcbef3fffd">[email&#160;protected]</a> with the subject line "California Privacy Request."</p>
+  </div>
+
+  <div class="section" id="p13">
+    <div class="section-num">13</div>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. When we make changes, we will update the "Last Updated" date at the top of this page. For material changes, we will notify you via email or a prominent notice on our website at least 30 days before the changes take effect.</p>
+    <p>Your continued use of the Service after changes are posted constitutes your acceptance of the updated Privacy Policy.</p>
+  </div>
+
+  <div class="section" id="p14">
+    <div class="section-num">14</div>
+    <h2>Contact Us</h2>
+    <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+    <ul>
+      <li><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="61080f12150015090413001118020e21060c00080d4f020e0c">[email&#160;protected]</a></li>
+      <li><strong>Website:</strong> instatherapyco.com</li>
+    </ul>
+    <p>We will respond to all privacy-related inquiries within 30 days.</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Instatherapy. All rights reserved. &nbsp;·&nbsp; <a h
